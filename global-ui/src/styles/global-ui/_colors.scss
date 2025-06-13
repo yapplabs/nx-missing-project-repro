@@ -1,0 +1,90 @@
+@use 'sass:map';
+@use 'global-ui/mixins/custom-properties';
+@use 'global-ui/mixins/index' as yapp-mixins;
+@use "global-ui/default-variables" as vars;
+
+// BEGIN-SNIPPET color-map
+$colors: (
+  'blue': vars.$blue,
+  'light-blue': vars.$light-blue,
+  'dark-blue': vars.$dark-blue,
+  'teal': vars.$teal,
+  'green': vars.$green,
+  'orange': vars.$orange,
+  'red': vars.$red,
+  'gradient-start-blue': vars.$gradient-start-blue,
+  'gradient-end-green': vars.$gradient-end-green,
+  'black': vars.$black,
+  'white': vars.$white,
+  'facebook-blue': vars.$facebook-blue,
+  'x-twitter-black': vars.$black,
+  // Old Grays
+  'dark-gray': vars.$dark-gray,
+  'gray': vars.$gray,
+  'light-gray': vars.$light-gray,
+  'lighter-gray': vars.$lighter-gray,
+  // New grays
+  'gray-100': vars.$gray-100,
+  'gray-200': vars.$gray-200,
+  'gray-300': vars.$gray-300,
+  'gray-400': vars.$gray-400,
+  'gray-500': vars.$gray-500,
+  'gray-600': vars.$gray-600,
+  'gray-700': vars.$gray-700,
+  'gray-800': vars.$gray-800,
+  'gray-900': vars.$gray-900,
+);
+// END-SNIPPET
+@include custom-properties.cssvars($colors);
+
+@function c($col) {
+  @return map.get($colors, '#{$col}');
+}
+
+.bg-theme-primary,
+.theme-light .lt\:bg-theme-primary,
+.theme-dark .dt\:bg-theme-primary {
+  background-color: var(--theme-color);
+}
+
+.bg-theme-primary-before {
+  &::before {
+    background-color: var(--theme-color);
+  }
+}
+
+.bg-theme-light,
+.theme-light .lt\:bg-theme-light {
+  background-color: var(--theme-light-bg-color);
+}
+
+.text-theme-primary,
+.theme-dark .dt\:text-theme-primary,
+.theme-light .lt\:text-theme-primary {
+  color: rgba(var(--theme-color-rgb), var(--text-opacity));
+}
+
+.theme-dark .u-textOnBackground {
+  color: #fff;
+}
+
+.theme-light .u-textOnBackground {
+  color: #000;
+}
+
+@each $name, $color in $colors {
+  .text-#{$name} {
+    color: rgba($color, var(--text-opacity));
+  }
+
+  .bg-#{$name} {
+    background-color: $color;
+  }
+
+  @include yapp-mixins.dark-only(text-#{$name}) {
+    color: rgba($color, var(--text-opacity));
+  }
+  @include yapp-mixins.light-only(text-#{$name}) {
+    color: rgba($color, var(--text-opacity));
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "name": "@yappbox/global-ui",
+  "version": "5.4.0",
+  "private": false,
+  "description": "V2 Ember addons for UI code usable by all Yapp apps.",
+  "keywords": [
+    "ember-addon"
+  ],
+  "tags": [
+    "type:ember-addon"
+  ],
+  "repository": "",
+  "license": "ISC",
+  "author": "",
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist"
+  ],
+  "scripts": {
+    "build": "concurrently \"pnpm:build:*\" --names \"build:\"",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\"",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:js": "nx eslint:lint --cache",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js:fix": "nx eslint:lint --fix",
+    "lint:scss": "stylelint 'src/**/*.scss' --quiet",
+    "lint:scss:fix": "stylelint 'src/**/*.scss' --quiet --fix",
+    "lint:types": "glint",
+    "rebuild:usage": "node bin/rebuild-usage.mjs",
+    "start": "concurrently \"pnpm:start:*\" --names \"start:\"",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in global-ui-test-ap'",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "catalog:",
+    "@glimmer/tracking": "catalog:",
+    "classnames": "catalog:",
+    "decorator-transforms": "catalog:",
+    "ember-css-transitions": "catalog:",
+    "macro-decorators": "catalog:"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/plugin-transform-typescript": "^7.23.6",
+    "@babel/runtime": "^7.17.0",
+    "@embroider/addon-dev": "catalog:",
+    "@glimmer/component": "catalog:",
+    "@glint/core": "catalog:",
+    "@glint/environment-ember-loose": "catalog:",
+    "@glint/environment-ember-template-imports": "catalog:",
+    "@glint/template": "catalog:",
+    "@tsconfig/ember": "^3.0.2",
+    "@types/ember": "^4.0.11",
+    "@types/ember__object": "^4.0.12",
+    "@types/ember__destroyable": "^4.0.5",
+    "@types/ember__owner": "^4.0.8",
+    "@types/ember__service": "^4.0.8",
+    "@types/ember__controller": "^4.0.11",
+    "@types/ember__string": "catalog:",
+    "@types/ember__template": "^4.0.5",
+    "@types/ember__polyfills": "^4.0.5",
+    "@types/ember__utils": "^4.0.6",
+    "@types/ember__runloop": "^4.0.8",
+    "@types/ember__debug": "^4.0.7",
+    "@types/ember__engine": "^4.0.10",
+    "@types/ember__application": "^4.0.10",
+    "@types/ember__test": "^4.0.5",
+    "@types/ember__array": "^4.0.9",
+    "@types/ember__error": "^4.0.5",
+    "@types/ember__component": "^4.0.21",
+    "@types/ember__modifier": "catalog:",
+    "@types/ember__helper": "^4.0.5",
+    "@types/ember__routing": "^4.0.19",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@rollup/plugin-babel": "catalog:",
+    "babel-plugin-ember-template-compilation": "^2.2.1",
+    "concurrently": "^8.2.2",
+    "ember-template-lint": "^5.13.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-ember": "^11.12.0",
+    "eslint-plugin-import": "catalog:",
+    "eslint-plugin-n": "^16.4.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "normalize.css": "catalog:",
+    "sass": "^1.77.5",
+    "stylelint": "catalog:",
+    "stylelint-config-recommended-scss": "catalog:",
+    "stylelint-config-sass-guidelines": "catalog:",
+    "stylelint-scss": "catalog:",
+    "prettier": "^3.1.1",
+    "prettier-plugin-ember-template-tag": "catalog:",
+    "rollup": "^4.9.1",
+    "rollup-plugin-shell": "catalog:",
+    "rollup-plugin-styles": "catalog:",
+    "typescript": "^5.3.3",
+    "webpack": ">=5.0.0 <6.0.0-0"
+  },
+  "peerDependencies": {
+    "@fortawesome/ember-fontawesome": "catalog:",
+    "@fortawesome/fontawesome-svg-core": "catalog:",
+    "@fortawesome/free-brands-svg-icons": "catalog:",
+    "@fortawesome/pro-light-svg-icons": "catalog:",
+    "@fortawesome/pro-solid-svg-icons": "catalog:",
+    "ember-concurrency": "^3.1.1",
+    "ember-freestyle": "^0.21.0",
+    "ember-in-viewport": "^4.1.0",
+    "ember-inflector": "^5.0.2",
+    "ember-modifier": "^4.2.0",
+    "ember-truth-helpers": "^4.0.3"
+  },
+  "peerDependenciesMeta": {
+    "ember-freestyle": {
+      "optional": true
+    },
+    "ember-inflector": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./components/separator/index.js": "./dist/_app_/components/separator/index.js",
+      "./helpers/html-safe.js": "./dist/_app_/helpers/html-safe.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./styles/*.css": "./dist/styles/*.css",
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  },
+  "volta": {
+    "extends": "../package.json"
+  }
+}

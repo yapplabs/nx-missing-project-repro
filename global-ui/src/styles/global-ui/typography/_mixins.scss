@@ -1,0 +1,209 @@
+@use "sass:math";
+@use "global-ui/default-variables" as vars;
+
+@mixin muted-text {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: vars.$gray;
+
+  .theme-dark & {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+@mixin uppercase-text {
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
+}
+
+@mixin single-line-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin multi-line-ellipsis($max-lines, $font-size, $line-height) {
+  // autoprefixer is stripping this but it is needed in Chrome
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  // stylelint-disable-next-line property-no-unknown
+  box-orient: vertical;
+  -webkit-line-clamp: $max-lines;
+  display: -webkit-box;
+  font-size: $font-size;
+  line-height: $line-height;
+  // If you get errors here, be sure that max-lines is an integer, line-height is a
+  // decimal without units, and font-size is a value in CSS units
+  max-height: $max-lines * $line-height * $font-size;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin text-color-baseline {
+  color: var(--main-color);
+
+  .theme-dark &,
+  .theme-dark & > a {
+    color: #fff;
+  }
+}
+
+@mixin heading-1-size {
+  font-size: vars.$h1-font-size-ratio * 1rem;
+  font-weight: 400;
+}
+
+@mixin heading-1 {
+  @include heading-1-size;
+  line-height: 1.2;
+  margin-bottom: math.div(0.7em, vars.$h1-font-size-ratio);
+  margin-top: math.div(1.5em, vars.$h1-font-size-ratio);
+
+  + h2 {
+    font-size: vars.$h2-after-h1-font-size-ratio * 1rem;
+    margin-bottom: math.div(0.7em, vars.$h2-after-h1-font-size-ratio);
+    margin-top: math.div(-0.6em, vars.$h2-after-h1-font-size-ratio);
+    opacity: 0.8;
+  }
+}
+
+@mixin heading-2-size {
+  font-size: vars.$h2-font-size-ratio * 1rem;
+  font-weight: 400;
+}
+
+@mixin heading-2 {
+  @include heading-2-size;
+  line-height: 1.2;
+  margin-bottom: math.div(0.5em, vars.$h2-font-size-ratio);
+  margin-top: math.div(1.5em, vars.$h2-font-size-ratio);
+
+  + h3 {
+    margin-top: math.div(-0.4em, vars.$h3-font-size-ratio);
+    margin-bottom: math.div(0.6em, vars.$h3-font-size-ratio);
+    opacity: 0.7;
+  }
+}
+
+@mixin heading-3-size {
+  font-weight: 400;
+  font-size: vars.$h3-font-size-ratio * 1rem;
+}
+
+@mixin heading-3 {
+  @include heading-3-size;
+  line-height: 1;
+  margin-bottom: math.div(0.2em, vars.$h3-font-size-ratio);
+  margin-top: math.div(1.5em, vars.$h3-font-size-ratio);
+}
+
+@mixin mobiledoc-text {
+  text-size-adjust: 100%;
+  overflow-wrap: break-word;
+  --main-color: #000;
+
+  > * {
+    color: var(--main-color);
+    font-family: var(--theme-font-family);
+    line-height: vars.$line-height-base;
+  }
+
+  > .__rendered-mobiledoc-card {
+    margin: 1em 0;
+    max-width: 100%;
+    padding: 0;
+
+    &:first-child {
+      margin-top: -1em;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+  i,
+  em {
+    font-style: italic;
+  }
+
+  h1 {
+    @include heading-1-size;
+  }
+
+  h2 {
+    @include heading-2-size;
+  }
+
+  h3 {
+    @include heading-3-size;
+  }
+
+  p,
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  h1 + h2 {
+    margin-top: -0.75rem;
+  }
+
+  h2 + h3 {
+    margin-top: -0.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  [data-md-text-align='center'] {
+    text-align: center;
+  }
+
+  [data-md-text-align='left'] {
+    text-align: left;
+  }
+
+  [data-md-text-align='right'] {
+    text-align: right;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 0.75em;
+
+    li {
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 0;
+      margin-left: 2rem;
+    }
+  }
+  ul li {
+    list-style: disc;
+  }
+  ol li {
+    list-style: decimal;
+  }
+
+  > * > a {
+    background: transparent;
+    color: #444;
+    white-space: normal;
+
+    &:active {
+      outline: 0;
+    }
+
+    &:visited,
+    &:active {
+      color: #444;
+    }
+  }
+}

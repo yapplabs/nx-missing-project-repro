@@ -1,0 +1,63 @@
+{
+  "private": false,
+  "repository": "",
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "build": "nx run-many -t build",
+    "build:addons": "nx run-many -t build --projects=tag:type:ember-addon",
+    "changeset:version": "pnpm changeset version && nx run-many -t postversion",
+    "changeset:publish": "pnpm changeset publish",
+    "create-addon": "nx generate addon",
+    "lint:fix": "nx run-many -t lint:fix",
+    "lint": "nx run-many -t lint",
+    "ui-explorer": "nx run ui-explorer-app:start",
+    "test": "nx run-many -t test"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "catalog:",
+    "@changesets/cli": "catalog:",
+    "@glint/core": "catalog:",
+    "@nx/eslint": "catalog:",
+    "@nx/eslint-plugin": "catalog:",
+    "@nx/jest": "catalog:",
+    "@nx/js": "catalog:",
+    "@nx/plugin": "catalog:",
+    "@nx/rollup": "catalog:",
+    "@swc-node/register": "catalog:",
+    "@swc/cli": "catalog:",
+    "@swc/core": "catalog:",
+    "@swc/helpers": "catalog:",
+    "@types/node": "18.16.9",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "concurrently": "^8.2.0",
+    "eslint": "~8.57.0",
+    "eslint-config-prettier": "^9.0.0",
+    "nx": "catalog:",
+    "prettier": "^3.0.3",
+    "prettier-plugin-ember-template-tag": "catalog:",
+    "rollup": "^4.14.0",
+    "tslib": "catalog:",
+    "typescript": "~5.7.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/eslint": "^7.0.0"
+    },
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "nx"
+    ]
+  },
+  "resolutions": {
+    "moment": "2.25.3"
+  },
+  "volta": {
+    "node": "20.19.1",
+    "pnpm": "10.12.1"
+  },
+  "dependencies": {
+    "@nx/devkit": "catalog:"
+  }
+}

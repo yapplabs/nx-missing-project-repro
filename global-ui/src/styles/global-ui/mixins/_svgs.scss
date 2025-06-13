@@ -1,0 +1,35 @@
+@use 'global-ui/default-variables' as vars;
+
+@mixin brands-svg($class) {
+  @at-root .theme-light #{$class} .SVG {
+    $bluesky-blue: #0A7AFF;
+    $linkedin-blue: #0077B5;
+    $pinterest-red: #bd081c;
+    $whatsapp-green: #25d366;
+
+    &-bluesky {
+      color: vars.$bluesky-blue;
+    }
+    &-linkedin {
+      color: $linkedin-blue;
+    }
+    &-x-twitter {
+      color: vars.$x-twitter-black;
+    }
+    &-instagram {
+      color: #000;
+    }
+    &-pinterest {
+      color: $pinterest-red;
+    }
+    &-facebook {
+      color: vars.$facebook-blue;
+    }
+    &-whatsapp {
+      color: $whatsapp-green;
+    }
+    &-spotify {
+      color: vars.$spotify-green;
+    }
+  }
+}

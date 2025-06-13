@@ -1,0 +1,7 @@
+{
+  "name": "@yappbox/mobile-ui",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "mobile-ui/src",
+  "projectType": "library",
+  "tags": ["type:ember-addon"]
+}

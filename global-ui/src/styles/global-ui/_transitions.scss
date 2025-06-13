@@ -1,0 +1,44 @@
+@use 'global-ui/default-variables' as vars;
+
+.fade-enter,
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s vars.$anim-timing-func;
+}
+
+.fade-leave,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s vars.$anim-timing-func;
+}
+
+.fadeInUp-leave.fadeInUp-leave-active,
+.fadeInUp-enter.fadeInUp-enter-active,
+.fadeInDown-leave.fadeInDown-leave-active,
+.fadeInDown-enter.fadeInDown-enter-active,
+.fade-in-down-enter-active,
+.fade-in-down-leave-active {
+  transition: opacity vars.$duration vars.$easing, transform vars.$duration vars.$easing;
+}
+
+.fadeInUp-enter,
+.fadeInUp-leave.fadeInUp-leave-active {
+  opacity: 0.01;
+  transform: translate3d(0, 15%, 0);
+}
+
+.fadeInDown-enter,
+.fadeInDown-leave.fadeInDown-leave-active,
+.fade-in-down-enter,
+.fade-in-down-leave-to {
+  opacity: 0.01;
+  transform: translate3d(0, -15%, 0);
+}
+
+.fadeInUp-leave,
+.fadeInUp-enter.fadeInUp-enter-active,
+.fadeInDown-leave,
+.fadeInDown-enter.fadeInDown-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}

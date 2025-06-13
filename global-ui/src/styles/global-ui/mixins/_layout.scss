@@ -1,0 +1,12 @@
+@mixin mobile-centered-content-container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: 1em 0 1px;
+}
+
+@mixin mobile-centered-content-box {
+  margin: 0 auto;
+  max-width: 580px;
+  padding: 0 5%;
+}

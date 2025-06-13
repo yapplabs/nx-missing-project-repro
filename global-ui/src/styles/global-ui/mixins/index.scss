@@ -1,0 +1,111 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
+@use 'global-ui/mixins/custom-properties';
+@use "global-ui/default-variables" as vars;
+@forward 'global-ui/mixins/layout';
+
+@mixin light-only($selector) {
+  .theme-light .lt\:#{$selector} {
+    @content;
+  }
+}
+@mixin dark-only($selector) {
+  .theme-dark .dt\:#{$selector} {
+    @content;
+  }
+}
+
+@mixin selectable-text {
+  user-select: text;
+}
+
+@mixin not-selectable {
+  -webkit-user-drag: none;
+  // stylelint-disable-next-line property-no-unknown
+  user-drag: none; /* autoprefixer does not support user-drag (it is non-standard), so don't remove */
+  -moz-user-select: none;
+  user-select: none;
+}
+
+
+@mixin vertical-align-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+@mixin supports-safe-area-insets {
+  @supports (padding-top: env(safe-area-inset-top)) {
+    @content;
+  }
+}
+
+@mixin center-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+@mixin focus-ring {
+  &:focus {
+    /* Adds a white border around the button, along with a blue glow. The white and blue have a color contrast ratio of at least 3:1, which means this will work against any background color. */
+    box-shadow: 0 0 0 2px vars.$white, 0 0 3px 5px vars.$blue;
+
+    /* NOTE: box-shadow is invisible in Windows high-contrast mode, so we need to add a transparent outline, which actually does show up in high-contrast mode. */
+    outline: 2px dotted transparent;
+    outline-offset: 2px;
+  }
+}
+
+/*
+  Transition Mixin
+
+  This mixin aims to make it easier to apply scss transitions by removing the boilerplate
+  needed to use the timing and easing variables we use throughout the app
+
+  Example usage:
+    @include transition('color');
+  outputs:
+    transition: color $anim-duration $anim-timing-func;
+
+  It can take an number of arguments and it will combine them into a single property
+    @include transition('background-color', 'color')
+  outputs:
+    transition: background-color $anim-duration $anim-timing-func,
+                color $anim-duration $anim-timing-func;
+
+  You can override the timing by passing a list for a particular argument:
+    @include transition(['color', 350ms]);
+  outputs:
+    transition: color 350ms $anim-timing-func;
+*/
+@mixin transition($args...) {
+  $attr: null;
+
+  @each $arg in $args { // Loop over each argument
+    $timing: vars.$anim-duration; // default the timing
+    $property: string.unquote($arg);
+
+    @if meta.type-of($arg) == list {  // if it's a list
+      $property: list.nth($arg, 1); // take the first list item to be the property name
+      $timing: list.nth($arg, 2); // and the second to be timing
+    }
+
+    $attr: list.append($attr, $property $timing vars.$anim-timing-func, comma) // append them together
+  }
+
+  & {
+    transition: $attr;
+  }
+}
+
+@mixin absolutely-fill-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -1,0 +1,15 @@
+@use 'global-ui/mixins/custom-properties';
+@use 'global-ui/default-variables' as vars;
+
+// .text-opacity- classes
+@each $class, $value in vars.$text-opacity-stops {
+  .text-opacity-#{$class} {
+    @include custom-properties.cssvar(text-opacity, $value);
+  }
+}
+
+.u-titlebarFont, .u-largeTitleFont {
+  font-family: var(--theme-title-bar-font-family);
+  text-transform: var(--theme-title-bar-text-transform);
+  letter-spacing: var(--theme-title-bar-letter-spacing);
+}

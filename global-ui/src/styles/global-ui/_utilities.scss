@@ -1,0 +1,12 @@
+.text-center {
+  text-align: center;
+}
+
+.u-loadingFadeIn {
+  opacity: 1;
+  transition: opacity 0.3s;
+
+  &[data-loading] {
+    opacity: 0;
+  }
+}

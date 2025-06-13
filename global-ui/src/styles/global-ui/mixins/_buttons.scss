@@ -1,0 +1,94 @@
+@use "global-ui/default-variables" as vars;
+@use 'global-ui/mixins/index' as yapp-mixins;
+
+@mixin no-touch($selector) {
+  .no-touch #{$selector},
+  .no-touchevents #{$selector} {
+    @content;
+  }
+}
+
+@mixin non-disabled-hover { @include no-touch('&:not([disabled]):hover') { @content; } }
+@mixin hover { @include no-touch("&:hover") { @content; } }
+@mixin active { @include no-touch("&:active") { @content; } }
+@mixin focus { @include no-touch("&:focus") { @content; } }
+
+@mixin button-base {
+  @include yapp-mixins.center-content;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: calc(0.4em - 1px) 1em;
+  position: relative;
+  vertical-align: top;
+  white-space: nowrap;
+  text-decoration: none;
+
+  transition:
+    color var(--duration) var(--easing),
+    opacity var(--duration) var(--easing),
+    transform var(--duration) var(--easing),
+    box-shadow var(--duration-quick) var(--easing),
+    filter var(--duration-quick) var(--easing),
+    background-color var(--duration) var(--easing);
+
+  @include hover {
+    text-decoration: none;
+  }
+
+  @include focus {
+    outline: none;
+
+  }
+  @include active {
+    transform: translateY(2px);
+  }
+}
+
+@mixin text-only-button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: inherit;
+  padding: 0;
+}
+
+@mixin icon-only-button {
+  border: 0;
+  background: transparent;
+  color: #bebebe;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 0;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+
+@mixin accessible-icon-button-label {
+  // https://www.nczonline.net/blog/2013/04/01/making-accessible-icon-buttons/;https
+  font-size: 0;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+}
+
+@mixin mobile-button(
+  $active-bg: vars.$light-gray,
+  $font-size: 1rem,
+ ) {
+  flex-direction: row;
+  font-size: $font-size;
+
+  @include button-base;
+  @include active {
+    background-color: $active-bg;
+  }
+}

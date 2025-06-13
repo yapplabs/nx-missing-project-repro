@@ -1,0 +1,11 @@
+@use "normalize";
+@use 'global-ui/root-css-variables';
+@use 'global-ui/animations';
+@use 'global-ui/utilities';
+@use 'global-ui/typography/classes';
+
+@include normalize.normalize();
+
+* {
+  box-sizing: border-box;
+}

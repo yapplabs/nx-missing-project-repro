@@ -1,0 +1,44 @@
+@use 'sass:list';
+@use 'sass:math';
+
+$list-of-directions: "up", "right", "down", "left";
+
+/* You can pass two values to size the triangle. The first value
+ * controls the width of the triangle while the second controls the height.
+ */
+@mixin triangle($direction: "bottom", $base: 10px, $height: 8px) {
+  @if list.index($list-of-directions, $direction) {
+    content: "";
+    display: block;
+
+    @if $direction == "up" {
+      width: $base;
+      height: $height;
+      clip-path: polygon(50% 0,100% 100%,0 100%);
+    }
+
+    @else if $direction == "right" {
+      width: $height;
+      height: $base;
+      clip-path: polygon(0 0, 0 100%, 100% 50%);
+    }
+
+    @else if $direction == "down" {
+      width: $base;
+      height: $height;
+      clip-path: polygon(100% 0, 0 0, 50% 100%);
+    }
+
+    @else if $direction == "left" {
+      width: $height;
+      height: $base;
+      clip-path: polygon(100% 100%, 100% 0, 0 50%);
+    }
+
+    @content;
+  }
+
+  @else {
+    @error "The argument for direction must be one of the followings: #{$list-of-directions}";
+  }
+}

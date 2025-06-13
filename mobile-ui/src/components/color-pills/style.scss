@@ -1,0 +1,16 @@
+.ColorPills {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  flex-direction: column;
+  height: 100%;
+  width: 5px;
+  padding: 5px 0;
+
+  &-pill {
+    width: 4px;
+    border-radius: 4px;
+    margin: 2px 0;
+  }
+}

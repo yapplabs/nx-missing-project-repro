@@ -1,0 +1,100 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/declarations"],
+      "cache": true
+    },
+    "build:js": {
+      "dependsOn": ["^build:js"],
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
+    },
+    "build:types": {
+      "dependsOn": ["^build:types"],
+      "outputs": ["{projectRoot}/declarations"],
+      "cache": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "cache": true
+    },
+    "start": {
+      "dependsOn": ["^build"]
+    },
+    "lint:fix": {
+      "cache": true
+    },
+    "lint:hbs": {
+      "cache": true
+    },
+    "lint:js": {
+      "cache": true
+    },
+    "lint:hbs:fix": {
+      "cache": true
+    },
+    "lint:js:fix": {
+      "cache": true
+    },
+    "lint:types": {
+      "cache": true
+    },
+    "rebuild:usage": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    },
+    "prepack": {
+      "cache": true
+    },
+    "lint:scss": {
+      "cache": true
+    },
+    "lint:scss:fix": {
+      "cache": true
+    },
+    "ci-test": {
+      "cache": true
+    },
+    "test:ember": {
+      "cache": true
+    },
+    "rebuild:colors": {
+      "cache": true
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
+    },
+    "@nx/eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.mjs"
+      ]
+    }
+  },
+  "defaultBase": "main",
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "eslint:lint"
+      }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "rollup:build",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    }
+  ]
+}
